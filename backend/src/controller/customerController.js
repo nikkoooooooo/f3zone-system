@@ -1,3 +1,4 @@
+import Admin from "../model/adminModel.js";
 import Customer from "../model/customerModel.js"
 import nodemailer from "nodemailer";
 
@@ -65,9 +66,33 @@ export async function inquireUser(req, res) {
 // in the database so that it could display in the admin dashboard
 export async function getAllCustomer(req, res) {
     try {
+        const userName = req.user.fullName
         const customers = await Customer.find()
-        res.status(200).json(customers)
+        res.status(200).json({customers: customers, adminName: userName})
     } catch (error) {
         res.status(500).json({message:'internal error cant access', error})
+    }
+}
+
+
+export async function deleteCustomer(req, res) {
+
+    try {
+        const { id } = req.params;
+
+        const deleted = await Customer.findById(id);
+
+        if(!deleted) {
+            return res.status(404).json({ message: "customer not found"})
+        }
+
+
+        res.status(200).json({ message:"customer deleted successfully"})
+
+
+
+
+    } catch (error) {
+        res.status(500).json({ message: "error internal server"})
     }
 }

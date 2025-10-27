@@ -31,7 +31,6 @@ const AdminTable = ({ name, email, contact, plan, createAt, num=1}) => {
                 </td>
                 <td>
                     <button className='btn bg-transparent border border-yellow-500 text-yellow-500 mr-2'>Contact</button>
-                    <button className='btn bg-yellow-500  border border-yellow-500 text-white'>Convert</button>
                 </td>
             </tr>
         </>           
@@ -39,3 +38,10 @@ const AdminTable = ({ name, email, contact, plan, createAt, num=1}) => {
 }
 
 export default AdminTable
+
+
+
+
+
+// TODO: MAKE THE CONTACT BUTTON WORK WHEN THE ADMIN CLICK IT SHOUDL BE DELETE THE CUSTOMER THAT IS SELECTED
+// TODO: TRY TO DO IT MANUALLY FIRST TO PRACTICE, learn more about jwt like procting the route every req

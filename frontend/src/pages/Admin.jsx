@@ -5,17 +5,21 @@ import AdminTable from "../components/Admin/AdminTable.jsx"
 import api from "../lib/axios.js"
 import { useState } from "react"
 import { useEffect } from "react"
+import { toast } from "react-toastify"
 
 
 
 const Admin = () => {
     const [customer, setCustomer] = useState([]);
+    const [admin, setAdmin] = useState("");
 
     useEffect(() => {
         async function fetchCustomer() {
             try {
-                const res = await api.get('customer')
-                setCustomer(res.data)
+                
+                const res = await api.get('customer', { withCredentials: true})
+                setCustomer(res.data.customers)
+                setAdmin(res.data.adminName)
             } catch (error) {
                 console.log("error to fetch the customers", error)
             }
@@ -24,12 +28,34 @@ const Admin = () => {
     },[])
 
 
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await api.get("/auth/logout");
+
+            if (res.data.success) {
+                window.location.href = ("/")
+                toast.success("successfully logout")
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ message: "internal error server"})
+        }
+    }
+
+
   return (
     <div className="bg-[linear-gradient(135deg,#0a0a0a_50%,#e6bc06_50%)] w-full min-h-screen">
         <div className='pt-20 flex flex-col   gap-3 px-5 mb-4'>
-            <div className="flex items-center">
-                <FontAwesomeIcon icon={faUserTie} className="text-6xl text-yellow-500" />
-                <h1 className="text-4xl font-bold">Admin Dashboard</h1>
+            <div className="flex items-center justify-between px-10">
+
+                <div className="flex flex-row justify-center items-center gap-10">
+                    <FontAwesomeIcon icon={faUserTie} className="text-6xl text-yellow-500" />
+                    <h1 className="text-4xl font-bold">Admin Dashboard: {admin}</h1>
+                </div>
+                
+
+                <button onClick={handleLogout} className="bg-yellow-500 p-3 rounded-sm font-semibold">Logout</button>
             </div>
             <div>
                 <p className="text-gray-500">Manage customer inquires and membership applications</p>

@@ -11,6 +11,7 @@ import Blog from './pages/BlogPage';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import DevelopersPage from './pages/DevelopersPage';
+import Login from './pages/Login';
 
 
 function App() {
@@ -35,10 +36,11 @@ function App() {
       {/* we define the path per pages so our app, become dynamic */}
       <Routes>
         <Route path='/' element={<Home/> } />
+        <Route path='/login' element={<Login/> } />
         <Route path='/treats' element={<Menu/> } />
         <Route path='/inquiry' element={<InquiryBox/> } />
         <Route path='/blog' element={<Blog/> } />
-        <Route path='/admin' element={<Admin/> } />``
+        <Route path='/admin' element={<Admin/> } />
         <Route path='/terms' element={<Terms/> } />
         <Route path='/privacy' element={<Privacy/> } />
         <Route path='/developers' element={<DevelopersPage/> } />

@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors"
 import { connectDB } from "../src/config/db.js"
 import customerRoutes from "../src/routes/customerRoutes.js";
+import authRoutes from "../src/routes/authRoutes.js";
+import cookieParser from "cookie-parser"
+
 
 
 // we import dotenv and use dotenv.config to be able to read the var in the .env file
@@ -12,13 +15,19 @@ const app = express()
 // import the PORT from .env and store it in var called PORT
 const PORT = process.env.PORT || 8000;
 // we use cors to be able our frontend and backend connect each other
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+
+}))
 // we use express.json so that our program be able to read JSON data
 app.use(express.json())
+app.use(cookieParser())
 // we state here our endpoints and import the customerRoutes
 // so that if at 'customer' it will go to the customerRoutes 
 // and just analyze what method are we requesting
 app.use('/api/customer', customerRoutes)
+app.use('/api/auth', authRoutes)
 
 
 

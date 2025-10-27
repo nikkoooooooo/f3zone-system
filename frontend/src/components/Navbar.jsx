@@ -11,16 +11,21 @@ const Navbar = () => {
     navigate('/');
   }
 
+  const login = () => {
+    navigate('/login')
+  }
+
 
 
   const links = [
-    { name: 'Home', to: '/' },
+    { name: 'Home', to: '/#home' },
     { name: 'Service', to: '/#service' },
     { name: 'Treats', to: '/treats' },
     { name: 'Rates', to: '/#pricing' },
     { name: 'Blog', to: '/blog' },
     { name: 'Contact', to: '/#contact' },
     { name: 'About', to: '/#about' },
+    { name: 'Login', to: "/login"}
   ];
 
   return (
@@ -38,7 +43,9 @@ const Navbar = () => {
           <li key={i} className='hover:bg-yellow-500 font-semibold px-3 rounded-md'>
             <HashLink smooth to={link.to}>{link.name}</HashLink>
           </li>
+
         ))}
+        {/* <button onClick={login} className='border-yellow-500 border p-2 font-semibold rounded-md'>Login</button> */}
       </ul>
 
       {/* Mobile burger */}
@@ -74,6 +81,7 @@ const Navbar = () => {
                 <HashLink smooth to={link.to}>{link.name}</HashLink>
               </li>
             ))}
+            {/* <button onClick={login} className='px-4 py-2 hover:bg-yellow-500 rounded-md'>Login</button> */}
           </ul>
         )}
       </div>
